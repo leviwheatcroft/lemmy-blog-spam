@@ -1,0 +1,22 @@
+{
+  "name": "lemmy-blog-spam",
+  "version": "1.0.0",
+  "description": "load lemmy comments in web page",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leviwheatcroft/lemmy-blog-spam.git"
+  },
+  "keywords": [
+    "lemmy"
+  ],
+  "author": "Levi Wheatcroft",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leviwheatcroft/lemmy-blog-spam/issues"
+  },
+  "homepage": "https://github.com/leviwheatcroft/lemmy-blog-spam#readme"
+}
