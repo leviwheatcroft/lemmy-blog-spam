@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="./index.js"></script>
+    <script>
+      console.log('loaded')
+      window.addEventListener('load', function () {
+        document.querySelector('.load-post').addEventListener('click', 
+          function loadPost () {
+            const elements = document.forms['demo'].elements
+            const options = {
+              params: {
+                post_id: elements['params.post_id'].value,
+              },
+              urlBase: elements['urlBase'].value,
+              urlOrigin: elements['urlOrigin'].value,
+              container: elements['container'].value
+            }
+            lemmyBlogSpam(options)
+          }
+        )
+      })
+    </script>
+  </head>
+  <body>
+    <div id="demo-form">
+      <form name="demo">
+        <label>
+          params.post_id:
+          <input
+            name="params.post_id"
+            value="2511773"
+          />
+        </label>
+        <label>
+          urlBase:
+          <input
+            name="urlBase"
+            value="/api/v3"
+          />
+        </label>
+        <label>
+          urlOrigin:
+          <input
+            name="urlOrigin"
+            value="https://lemmy.ml"
+          />
+        </label>
+        <label>
+          container:
+          <input
+            name="container"
+            value="#lemmy-blog-spam"
+          />
+        </label>
+      </form>
+      <div>
+        <span class="load-post">Load Post</span>
+      </div>
+    </div>
+    <div id="lemmy-blog-spam"></div>
+  </body>
+</html>

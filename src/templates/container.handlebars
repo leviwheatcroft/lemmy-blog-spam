@@ -1,0 +1,22 @@
+<div class="post container mx-auto px-4">
+  <div class="post">
+    {{#with post}}
+      <div class="headline">
+        <span class="title font-bold">
+          <a href="{{ postUrl }}">{{ postName }}</a>
+        </span>
+      </div>
+      <div class="meta">
+        <span class="community">
+          <a href="{{ communityUrl }}">{{ communityTitle }}</a>
+        </span>
+        {{>votes total=countsScore up=countsUpvotes down=countsDownvotes}}
+      </div>
+    </div>
+  {{/with}}
+  <div class="comments">
+    {{#each root.children}}
+      {{>comment data=this}}
+    {{/each}}
+  </div>
+</div>
