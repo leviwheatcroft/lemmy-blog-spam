@@ -2,7 +2,7 @@ import Comment from './Comment.js'
 
 const urlEndpoint = '/comment/list'
 
-export default async function getComments (post, options) {
+export default async function getComments (post, progress, options) {
   const {
     countsComments
   } = post
@@ -29,7 +29,6 @@ export default async function getComments (post, options) {
     page += 1
     url.searchParams.set('page', page)
     const request = new Request(url, requestOptions)
-    console.log(url.href)
     const response = await fetch(request)
     if (!response.ok) {
       console.error(response.status)
@@ -38,6 +37,7 @@ export default async function getComments (post, options) {
     }
     const json = await response.json()
     const { comments: _commentsRaw } = json
+    progress(_commentsRaw.length)
     commentsRaw.push(..._commentsRaw)
   }
 
