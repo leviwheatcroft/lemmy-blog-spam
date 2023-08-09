@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
+    "start": "web-dev-server",
     "serve": "browser-sync start --config bs-config.cjs",
     "dev": "webpack build --config ./webpack.config.js --watch",
     "build": "NODE_ENV=production webpack build --config ./webpack.config.js"
@@ -27,6 +28,7 @@
     "css-loader": "^6.6.0",
     "dayjs": "^1.11.9",
     "handlebars-loader": "^1.7.3",
+    "lit": "^2.8.0",
     "postcss": "^8.4.7",
     "postcss-loader": "^6.2.1",
     "postcss-preset-env": "^7.4.2",
@@ -40,6 +42,7 @@
     "eslint": "^8.40.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-vue": "^9.15.1"
+    "eslint-plugin-vue": "^9.15.1",
+    "source-map-loader": "^4.0.1"
   }
 }
