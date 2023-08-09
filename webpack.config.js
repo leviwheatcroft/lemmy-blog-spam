@@ -10,7 +10,8 @@ export default {
   // stats: 'detailed',
   mode: prodn ? 'production' : 'development',
   entry: {
-    index: join(process.cwd(), 'src/index.js')
+    index: join(process.cwd(), 'src/index.js'),
+    ...prodn ? {} : { demo: join(process.cwd(), 'src/demo.js') }
   },
   output: {
     path: join(process.cwd(), 'dist'),
@@ -54,6 +55,11 @@ export default {
             }
           }
         ]
+      },
+      {
+        test: /\.m?js$/,
+        enforce: 'pre',
+        use: ['source-map-loader'],
       },
       {
         test: /\.handlebars$/,
