@@ -1,0 +1,6 @@
+import './lbs-container.js'
+import './lbs-comment.js'
+import './lbs-community.js'
+import './lbs-published.js'
+import './lbs-votes.js'
+import './icons/index.js'
