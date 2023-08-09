@@ -1,18 +1,11 @@
-const defaults = {
-  params: {
-    limit: 12,
-    max_depth: false,
-    post_id: false,
-    sort: false
-  },
-  container: '#lemmy-blog-spam',
-  urlOrigin: 'https://lemmy.ml',
-  urlBase: '/api/v3'
-}
+import defaults from '../defaults.js'
 
 export default function resolveOptions (options) {
   if (!options.params || !options.params.post_id) {
     throw new Error('params.post_id is required')
+  }
+  if (!options.urlOrigin) {
+    throw new Error('urlOrigin is required')
   }
   options.params = Object.assign(
     {},
