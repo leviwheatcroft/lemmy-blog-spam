@@ -1,7 +1,7 @@
 import { LitElement, css, html } from 'lit'
 import getComments from '../getComments.js'
 import getPost from '../getPost.js'
-import resolveOptions from '../resolveOptions.js'
+import { resolveOptions, defaults } from '../resolveOptions.js'
 
 export class LbsContainer extends LitElement {
   static properties = {
@@ -13,6 +13,10 @@ export class LbsContainer extends LitElement {
       type: String,
       attribute: 'params-post-id'
     },
+    paramsLimit: {
+      type: Number,
+      attribute: 'params-limit'
+    },
     urlBase: {
       type: String,
       attribute: 'url-base'
@@ -21,6 +25,7 @@ export class LbsContainer extends LitElement {
       type: String,
       attribute: 'url-origin'
     },
+    hideDepth: {},
     _post: {
       state: true
     },
@@ -71,14 +76,17 @@ export class LbsContainer extends LitElement {
 
   progress (count) {
     this._commentCount += count
+    this.hideDepth = defaults.hideDepth
   }
 
   attributeChangedCallback (attribute, _, value) {
     const map = {
       'params-max-depth': 'paramsMaxDepth',
       'params-post-id': 'paramsPostId',
+      'params-limit': 'paramsLimit',
       'url-base': 'urlBase',
       'url-origin': 'urlOrigin',
+      'hide-depth': 'hideDepth'
     }
     this[map[attribute]] = value
   }
@@ -98,9 +106,11 @@ export class LbsContainer extends LitElement {
     const options = resolveOptions({
       params: {
         max_depth: this.paramsMaxDepth,
-        post_id: this.paramsPostId
+        post_id: this.paramsPostId,
+        limit: this.paramsLimit
       },
       urlOrigin: this.urlOrigin,
+      hideDepth: this.hideDepth
     })
     const post = await getPost(options)
     this._post = post
@@ -117,7 +127,7 @@ export class LbsContainer extends LitElement {
         </div>
       `
     }
-    if (this._commentCount < this._post.countsComments) {
+    if (!this._children) {
       return html`
         <div class="loader">
           <span>loading</span>
@@ -160,6 +170,8 @@ export class LbsContainer extends LitElement {
                 .countsDownvotes=${child.countsDownvotes}
                 .children=${child.children}
                 .content=${child.content}
+                .depth=${child.depth}
+                .hideDepth=${this.hideDepth}
               ></lbs-comment>
             `
           })}

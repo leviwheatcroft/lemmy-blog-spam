@@ -1,6 +1,6 @@
 import defaults from '../defaults.js'
 
-export default function resolveOptions (options) {
+function resolveOptions (options) {
   if (!options.params || !options.params.post_id) {
     throw new Error('params.post_id is required')
   }
@@ -19,3 +19,5 @@ export default function resolveOptions (options) {
   )
   return options
 }
+
+export { resolveOptions, defaults }

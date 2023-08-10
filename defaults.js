@@ -1,6 +1,6 @@
 const defaults = {
   params: {
-    limit: 12,
+    limit: 64,
     max_depth: false,
     post_id: false,
     sort: false

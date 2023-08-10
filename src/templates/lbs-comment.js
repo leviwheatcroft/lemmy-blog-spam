@@ -10,6 +10,8 @@ export class LbsComment extends LitElement {
     countsDownvotes: {},
     content: {},
     children: {},
+    depth: {},
+    hideDepth: {},
     _collapsed: {
       type: Boolean,
       state: true
@@ -45,7 +47,14 @@ export class LbsComment extends LitElement {
 
   constructor () {
     super()
-    this._collapsed = false
+  }
+
+  connectedCallback () {
+    super.connectedCallback()
+    this._collapsed = (
+      this.depth > 0 &&
+      this.depth % this.hideDepth === 0
+    )
   }
 
   _toggleCollapsed () {
@@ -89,6 +98,8 @@ export class LbsComment extends LitElement {
                       .countsDownvotes=${child.countsDownvotes}
                       .children=${child.children}
                       .content=${child.content}
+                      .depth=${child.depth}
+                      .hideDepth=${this.hideDepth}
                     ></lbs-comment>
                   `
                 })}

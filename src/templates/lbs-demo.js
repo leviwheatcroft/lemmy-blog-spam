@@ -4,8 +4,10 @@ export class LbsDemo extends LitElement {
   static properties = {
     _paramsMaxDepth: { state: true },
     _paramsPostId: { state: true },
+    _paramsLimit: { state: true },
     _urlBase: { state: true },
     _urlOrigin: { state: true },
+    _hideDepth: { state: true }
   }
 
   static styles = css`
@@ -33,8 +35,10 @@ export class LbsDemo extends LitElement {
     super()
     this._paramsMaxDepth = 12
     this._paramsPostId = '1307075'
+    this._paramsLimit = 32
     this._urlBase = '/api/v3'
     this._urlOrigin = 'https://discuss.tchncs.de'
+    this._hideDepth = 4
   }
 
   _replaceLbsContainer () {
@@ -44,8 +48,10 @@ export class LbsDemo extends LitElement {
       `<lbs-container
         params-max-depth="${this._paramsMaxDepth}"
         params-post-id="${this._paramsPostId}"
+        params-limit="${this._paramsLimit}"
         url-base="${this._urlBase}"
         url-origin="${this._urlOrigin}"
+        hide-depth="${this._hideDepth}"
       ></lbs-container>`
     )
     existing.remove()
@@ -68,6 +74,13 @@ export class LbsDemo extends LitElement {
         />
       </label>
       <label>
+        params.limit
+        <input
+          @input=${(e) => this._paramsLimit = e.target.value}
+          value=${this._paramsLimit}
+        />
+      </label>
+      <label>
         urlBase
         <input
           @input=${(e) => this._urlBase = e.target.value}
@@ -79,6 +92,13 @@ export class LbsDemo extends LitElement {
         <input
           @input=${(e) => this._urlOrigin = e.target.value}
           value=${this._urlOrigin}
+        />
+      </label>
+      <label>
+        hideDepth
+        <input
+          @input=${(e) => this._hideDepth = e.target.value}
+          value=${this._hideDepth}
         />
       </label>
       <div class="buttons">
