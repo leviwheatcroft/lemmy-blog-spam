@@ -1,5 +1,3 @@
-// import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
-// import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import CopyPlugin from 'copy-webpack-plugin'
 import { join } from 'path'
 
@@ -22,8 +20,6 @@ export default {
       {
         test: /\.css$/i,
         use: [
-          // MiniCssExtractPlugin.loader,
-          // 'vue-style-loader',
           {
             loader: 'style-loader'
           },
@@ -32,27 +28,6 @@ export default {
             options: {
               url: false
             }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: [
-                  [
-                    'postcss-preset-env',
-                    {}
-                  ],
-                  [
-                    'tailwindcss',
-                    {
-                      content: [
-                        join(process.cwd(), 'src/templates/**/*.handlebars')
-                      ]
-                    }
-                  ]
-                ]
-              }
-            }
           }
         ]
       },
@@ -60,15 +35,10 @@ export default {
         test: /\.m?js$/,
         enforce: 'pre',
         use: ['source-map-loader'],
-      },
-      {
-        test: /\.handlebars$/,
-        loader: "handlebars-loader"
       }
     ]
   },
   plugins: [
-    // new MiniCssExtractPlugin({ filename: '[name].css' }),
     ...prodn ? [] : [
       new CopyPlugin({
         patterns: [
@@ -79,15 +49,5 @@ export default {
         ]
       })
     ]
-  ],
-  optimization: {
-    ...prodn ?
-      {
-        minimizer: [
-          '...',
-          // new CssMinimizerPlugin()
-        ]
-      } :
-      {}
-  }
+  ]
 }
