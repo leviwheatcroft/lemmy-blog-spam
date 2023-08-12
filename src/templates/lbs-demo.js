@@ -15,19 +15,46 @@ export class LbsDemo extends LitElement {
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin: 0 auto;
     }
     :host > * {
       margin-top: 16px;
-      width: 480px;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
     }
-    label {
-      width: 160px;
+    @media (min-width: 0px) {
+      :host {
+        width: 100%;
+      }
+      label {
+        width: 80px;
+      }
+      input {
+        width: 80px;
+      }
     }
-    input {
-      width: 320px;
+    @media (min-width: 320px) {
+      :host {
+        width: 320px;
+      }
+      label {
+        width: 160px;
+      }
+      input {
+        width: 160px;
+      }
+    }
+    @media (min-width: 768px) {
+      :host {
+        width: 480px;
+      }
+      label {
+        width: 160px;
+      }
+      input {
+        width: 320px;
+      }
     }
   `
 
@@ -59,50 +86,55 @@ export class LbsDemo extends LitElement {
 
   render () {
     return html`
-      <label>
-        params.max_depth
+      <div>
+        <label for="_paramsMaxDepth">params.max_depth</label>
         <input
+          name="_paramsMaxDepth"
           @input=${(e) => this._paramsMaxDepth = e.target.value}
           value=${this._paramsMaxDepth}
         />
-      </label>
-      <label>
-        params.post_id
+      </div>
+      <div>
+        <label for="_paramsPostId">params.post_id</label>
         <input
+          name="_paramsPostId"
           @input=${(e) => this._paramsPostId = e.target.value}
           value=${this._paramsPostId}
         />
-      </label>
-      <label>
-        params.limit
+      </div>
+      <div>
+        <label for="_paramsLimit">params.limit</label> 
         <input
+          name="_paramsLimit"
           @input=${(e) => this._paramsLimit = e.target.value}
           value=${this._paramsLimit}
         />
-      </label>
-      <label>
-        urlBase
+      </div>
+      <div>
+        <label for="_urlBase">urlBase</label>
         <input
+          name="_urlBase"
           @input=${(e) => this._urlBase = e.target.value}
           value=${this._urlBase}
         />
-      </label>
-      <label>
-        urlOrigin
+      </div>
+      <div>
+        <label for="_urlOrigin">urlOrigin</label>
         <input
+          name="_urlOrigin"
           @input=${(e) => this._urlOrigin = e.target.value}
           value=${this._urlOrigin}
         />
-      </label>
-      <label>
-        hideDepth
+      </div>
+      <div>
+        <label for="_hideDepth">hideDepth</label>
         <input
           @input=${(e) => this._hideDepth = e.target.value}
           value=${this._hideDepth}
         />
-      </label>
-      <div class="buttons">
-        <span class="spacer"></span>
+      </div>
+      <div>
+        <span></span>
         <button
           @click=${this._replaceLbsContainer}
         >Load Post</button>

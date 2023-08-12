@@ -40,6 +40,7 @@ export class LbsContainer extends LitElement {
   static styles = css`
     :host {
       font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+      font-size: 16px;
     }
     .loader {
       margin-top: 32px;
