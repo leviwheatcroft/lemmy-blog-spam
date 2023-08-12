@@ -1,3 +1,5 @@
+import { marked } from 'marked'
+
 const urlEndpoint = '/post'
 
 // [TODO] bad post_id
