@@ -1,3 +1,5 @@
+import { marked } from 'marked'
+
 export default class Comment {
   static createComments (commentsRaw) {
     new Comment()
