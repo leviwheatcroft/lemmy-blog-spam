@@ -49,11 +49,13 @@ Create the component
 
 # Package Size
 
-Lemmy Blog Spam is presently 82,494b minified (26,811 gzipped), so not great not terrible. Additionally, the API calls to pull down the actual comments will be significant.
+Lemmy Blog Spam is presently 82kb minified (27kb gzipped), so not great not terrible. Additionally, the API calls to pull down the actual comments will be significant.
 
 This includes `marked` (50kb) for rendering markdown, `lit` (5kb) for templates, and `dayjs` (5kb) for dates, with the remainder being templates, logic, and styles.
 
-Implementing a lazy loader is easy enough, there's a guide [in the docs]().
+_lazy loading_
+
+Implementing a lazy loader is easy enough, there's a guide [in the docs](https://github.com/leviwheatcroft/lemmy-blog-spam/blob/master/docs/lazy-loading.md).
 
 # Demo
 
