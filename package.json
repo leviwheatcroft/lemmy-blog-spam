@@ -7,8 +7,9 @@
   "scripts": {
     "start": "web-dev-server",
     "serve": "browser-sync start --config bs-config.cjs",
-    "dev": "webpack build --config ./webpack.config.js --watch",
-    "build": "NODE_ENV=production webpack build --config ./webpack.config.js"
+    "dev": "DEMO=true webpack build --config ./webpack.config.js --watch",
+    "build": "NODE_ENV=production webpack build --config ./webpack.config.js",
+    "build-demo": "DEMO=true NODE_ENV=production webpack build --config ./webpack.config.js"
   },
   "repository": {
     "type": "git",

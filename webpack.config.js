@@ -1,7 +1,9 @@
 import CopyPlugin from 'copy-webpack-plugin'
+import TerserPlugin from 'terser-webpack-plugin'
 import { join } from 'path'
 
 const prodn = process.env.NODE_ENV === 'production'
+const demo = process.env.DEMO === 'true'
 
 export default {
   // profile: true,
@@ -9,7 +11,7 @@ export default {
   mode: prodn ? 'production' : 'development',
   entry: {
     index: join(process.cwd(), 'src/index.js'),
-    ...prodn ? {} : { demo: join(process.cwd(), 'src/demo.js') }
+    ...demo ? { demo: join(process.cwd(), 'src/demo.js') } : {}
   },
   output: {
     path: join(process.cwd(), 'dist'),
@@ -39,7 +41,7 @@ export default {
     ]
   },
   plugins: [
-    ...prodn ? [] : [
+    ...demo ? [
       new CopyPlugin({
         patterns: [
           {
@@ -48,6 +50,11 @@ export default {
           }
         ]
       })
-    ]
-  ]
+    ] : []
+  ],
+  optimization: {
+    minimizer: [new TerserPlugin({
+      extractComments: false,
+    })],
+  },
 }

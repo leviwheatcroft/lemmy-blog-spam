@@ -22,7 +22,7 @@ include `lemmy-blog-spam`
 
 _download js_
 
-If you're not using a build tool then you could just download the built package here and place it in your web root.
+If you're not using a build tool then you could just [download the built package here](https://github.com/leviwheatcroft/lemmy-blog-spam/blob/master/docs/index.js), rename it to `lemmyBlogSpam.js`, and place it in your web root.
 
 Then load the javascript in your page.
 
