@@ -7,11 +7,16 @@ export default async function getComments (post, progress, options) {
     countsComments
   } = post
   const {
+    paramLimit: limit,
+    paramMaxDepth: max_depth,
+    paramPostId: post_id,
+    paramSort: sort,
     urlOrigin,
     urlBase
   } = options
   const url = new URL(urlBase + urlEndpoint, urlOrigin)
-  Object.entries(options.params)
+
+  Object.entries({ limit, max_depth, post_id, sort })
     .filter(([_, v]) => v)
     .forEach(([k, v]) => url.searchParams.append(k, v))
   const requestOptions = {

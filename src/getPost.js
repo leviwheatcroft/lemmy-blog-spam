@@ -6,9 +6,7 @@ const urlEndpoint = '/post'
 
 export default async function getPost (options) {
   const {
-    params: {
-      post_id
-    },
+    paramPostId: post_id,
     urlOrigin,
     urlBase
   } = options

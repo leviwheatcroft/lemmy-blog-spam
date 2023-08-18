@@ -1,21 +1,22 @@
-import { LitElement, css, html } from 'lit'
+import { LitElement, css, html, nothing } from 'lit'
+import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import getComments from '../getComments.js'
 import getPost from '../getPost.js'
 import { resolveOptions, defaults } from '../resolveOptions.js'
 
 export class LbsContainer extends LitElement {
   static properties = {
-    paramsMaxDepth: {
+    paramMaxDepth: {
       type: String,
-      attribute: 'params-max-depth'
+      attribute: 'param-max-depth'
     },
-    paramsPostId: {
+    paramPostId: {
       type: String,
-      attribute: 'params-post-id'
+      attribute: 'param-post-id'
     },
-    paramsLimit: {
+    paramLimit: {
       type: Number,
-      attribute: 'params-limit'
+      attribute: 'param-limit'
     },
     urlBase: {
       type: String,
@@ -26,6 +27,10 @@ export class LbsContainer extends LitElement {
       attribute: 'url-origin'
     },
     hideDepth: {},
+    showPostBody: {
+      type: Boolean,
+      attribute: 'show-post-body'
+    },
     _post: {
       state: true
     },
@@ -73,6 +78,7 @@ export class LbsContainer extends LitElement {
   constructor () {
     super()
     this._commentCount = 0
+    this.showPostBody = false
   }
 
   progress (count) {
@@ -82,20 +88,25 @@ export class LbsContainer extends LitElement {
 
   attributeChangedCallback (attribute, _, value) {
     const map = {
-      'params-max-depth': 'paramsMaxDepth',
-      'params-post-id': 'paramsPostId',
-      'params-limit': 'paramsLimit',
+      'param-max-depth': 'paramMaxDepth',
+      'param-post-id': 'paramPostId',
+      'param-limit': 'paramLimit',
       'url-base': 'urlBase',
       'url-origin': 'urlOrigin',
-      'hide-depth': 'hideDepth'
+      'hide-depth': 'hideDepth',
+      'show-post-body': 'showPostBody'
     }
-    this[map[attribute]] = value
+    if (attribute === 'show-post-body') {
+      this[map[attribute]] = true
+    } else {
+      this[map[attribute]] = value
+    }
   }
 
   async firstUpdated () {
     const msgs = []
     /* eslint-disable curly, nonblock-statement-body-position */
-    if (!this.paramsPostId) msgs.push('missing params-post-id')
+    if (!this.paramPostId) msgs.push('missing param-post-id')
     if (!this.urlOrigin) msgs.push('missing url-base')
     /* eslint-enable curly, nonblock-statement-body-position */
     if (msgs.length) {
@@ -105,11 +116,9 @@ export class LbsContainer extends LitElement {
     }
 
     const options = resolveOptions({
-      params: {
-        max_depth: this.paramsMaxDepth,
-        post_id: this.paramsPostId,
-        limit: this.paramsLimit
-      },
+      paramMaxDepth: this.paramMaxDepth,
+      paramPostId: this.paramPostId,
+      paramLimit: this.paramLimit,
       urlOrigin: this.urlOrigin,
       hideDepth: this.hideDepth
     })
@@ -159,6 +168,11 @@ export class LbsContainer extends LitElement {
               <a .href=${this._post.postUrl}><icon-external-link></icon-external-link></a>
             </span>
           </div>
+          ${ this.showPostBody ? html`
+            <div class="body">
+              ${unsafeHTML(this._post.postBody)}
+            </div>
+          ` : nothing }
         </div>
         <div class="comments">
           ${this._children.map((child) => {
