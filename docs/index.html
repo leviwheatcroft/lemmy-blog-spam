@@ -3,9 +3,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="module" src="./index.js"></script>
     <script type="module" src="./demo.js"></script>
+    <style>
+      .overview {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0 auto;
+      }
+      .overview > * {
+        margin-top: 16px;
+      }
+      @media (min-width: 0px) {
+        .overview {
+          width: 100%;
+        }
+      }
+      @media (min-width: 320px) {
+        .overview {
+          width: 320px;
+        }
+      }
+      @media (min-width: 768px) {
+        .overview {
+          width: 480px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div>
+    <div class="overview">
       <h1>Lemmy Blog Spam</h1>
       <p>Lemmy Blog Spam can load a post and comments from lemmy.</p>
       <p>It's perfect for including comments on a static blog. Just create a lemmy post and then include the post id in a custom component on your page.</p>
@@ -14,8 +40,9 @@
     </div>
     <lbs-demo></lbs-demo>
     <lbs-container
-      params-post-id="1307075"
-      url-origin="https://discuss.tchncs.de"
+      param-post-id="1385021"
+      url-origin="https://programming.dev"
+      show-post-body
     ></lbs-container>
   </body>
 </html>
